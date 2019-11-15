@@ -5,6 +5,11 @@ public class TicTacToe {
     public TicTacToe()
     {
         gameBoard = new char[3][3];
+
+        //put a space character in every position of the gameBoard
+        for (int row=0; row<gameBoard.length;row++)
+            for (int col=0;col<gameBoard[row].length;col++)
+                gameBoard[row][col]=' ';
     }
 
     /**
@@ -33,7 +38,7 @@ public class TicTacToe {
             {
                 System.out.printf(" %c %s", gameBoard[row][col], (col!=2)?"|":"");
             }
-            System.out.println("\n--------------");
+            System.out.printf("\n%s%n",(row!=2)?"------------":"");
         }
     }
 }
