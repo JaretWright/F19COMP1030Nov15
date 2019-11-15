@@ -14,6 +14,7 @@ public class ComparingNames {
             System.out.println(friends[i]);
 
         System.out.printf("The shortest name is %s.%n", shortest(friends));
+        System.out.printf("The shortest name is %s.%n", shortestName(friends));
     }
 
 
