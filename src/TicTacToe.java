@@ -20,11 +20,11 @@ public class TicTacToe {
     {
         gameBoard[0][0]='X';
         gameBoard[0][1]='O';
-        gameBoard[0][2]='X';
+        gameBoard[0][2]='O';
         gameBoard[1][1]='O';
         gameBoard[1][2]='O';
         gameBoard[2][0]='O';
-        gameBoard[2][1]='O';
+        gameBoard[2][1]='X';
         gameBoard[2][2]='X';
     }
 
@@ -72,6 +72,15 @@ public class TicTacToe {
                 &&gameBoard[1][1]!=' ')
             return true;
 
+        //check for a full board, but no winner
+        for (int row=0;row<gameBoard.length;row++)
+        {
+            for (int col=0; col<gameBoard[row].length;col++)
+            {
+                if (gameBoard[row][col]==' ')
+                    return false;
+            }
+        }
 
 
         return false;
