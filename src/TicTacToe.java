@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class TicTacToe {
 
     private char[][] gameBoard;
@@ -81,10 +83,53 @@ public class TicTacToe {
                     return false;
             }
         }
+        return true;
+    }
 
+    /**
+     * This method will receive a players character ('X' or 'O') and
+     * a row / col to place the character in.  It will validate that the
+     * position is available
+     */
+    public void makeMove(char player, int row, int col)
+    {
+        //check if the position is available
+        if (gameBoard[row-1][col-1] == ' ')
+            gameBoard[row-1][col-1]=player;
+        else
+            throw new IllegalArgumentException(
+                    String.format("position (%d,%d) is taken already",row,col));
+    }
 
-        return false;
+    /**
+     * This method will call the appropriate methods to play the full
+     * TicTacToe game
+     */
+    public void playGame()
+    {
+        for (int moveNum=1; moveNum<=9; moveNum++)
+        {
+            if (moveNum%2==0)
+                getPlayerMove('X');
+            else
+                getPlayerMove('O');
+        }
+    }
 
+    /**
+     * This method will ask a player to provide a move on the game board
+     */
+    public void getPlayerMove(char player)
+    {
+        System.out.printf("Player %c, enter a coordinate (i.e. 1,1): ",player);
+        Scanner keyboard = new Scanner(System.in);
+        String coordinates = keyboard.nextLine();
 
+        //split the user input into an array of String objects
+        String[] position = coordinates.split(",");
+        int row= Integer.parseInt(position[0]);  //convert a String to an Int
+        int col = Integer.parseInt(position[1]);
+
+        makeMove(player, row, col);
     }
 }
