@@ -131,6 +131,11 @@ public class TicTacToe {
             if (gameOver())
                 break;
         }
+        displayBoard();
+        if(winner.equals("tie"))
+            System.out.println("It was a tie");
+        else
+            System.out.printf("The winner is %s%n",winner);
     }
 
     /**
