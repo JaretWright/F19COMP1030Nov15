@@ -3,10 +3,12 @@ import java.util.Scanner;
 public class TicTacToe {
 
     private char[][] gameBoard;
+    private String winner;
 
     public TicTacToe()
     {
         gameBoard = new char[3][3];
+        winner = "tie";
 
         //put a space character in every position of the gameBoard
         for (int row=0; row<gameBoard.length;row++)
@@ -54,7 +56,10 @@ public class TicTacToe {
         {
             if (gameBoard[row][0]==gameBoard[row][1]&&gameBoard[row][0]==gameBoard[row][2]
                     &&gameBoard[row][0]!=' ')
+            {
+                winner = Character.toString(gameBoard[row][0]);
                 return true;
+            }
         }
 
         //check for a winner on a column
@@ -62,17 +67,26 @@ public class TicTacToe {
         {
             if (gameBoard[0][col]==gameBoard[1][col]&&gameBoard[0][col]==gameBoard[2][col]
                     &&gameBoard[0][col]!=' ')
+            {
+                winner = Character.toString(gameBoard[0][col]);
                 return true;
+            }
         }
 
         //check for a winner on the diagonals
         if (gameBoard[0][0]==gameBoard[1][1]&&gameBoard[1][1]==gameBoard[2][2]
                 &&gameBoard[0][0]!=' ')
+        {
+            winner = Character.toString(gameBoard[0][0]);
             return true;
+        }
 
         if (gameBoard[0][2]==gameBoard[1][1]&&gameBoard[1][1]==gameBoard[2][0]
                 &&gameBoard[1][1]!=' ')
+        {
+            winner = Character.toString(gameBoard[1][1]);
             return true;
+        }
 
         //check for a full board, but no winner
         for (int row=0;row<gameBoard.length;row++)
@@ -109,10 +123,13 @@ public class TicTacToe {
     {
         for (int moveNum=1; moveNum<=9; moveNum++)
         {
+            displayBoard();
             if (moveNum%2==0)
                 getPlayerMove('X');
             else
                 getPlayerMove('O');
+            if (gameOver())
+                break;
         }
     }
 
@@ -130,6 +147,14 @@ public class TicTacToe {
         int row= Integer.parseInt(position[0]);  //convert a String to an Int
         int col = Integer.parseInt(position[1]);
 
-        makeMove(player, row, col);
+        try {
+            makeMove(player, row, col);
+        }
+        catch (IllegalArgumentException e)
+        {
+            System.out.println(e.getMessage());
+            getPlayerMove(player);
+        }
+
     }
 }
